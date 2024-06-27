@@ -1,24 +1,36 @@
 <?php
-if (isset($_GET['id'])) {
-    $id = $_GET['id'];
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "penjualan"; // Nama database Anda
 
-    // Memasukkan file koneksi
-    include 'koneksi.php';
+// Membuat koneksi
+$conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Menyiapkan dan menjalankan query SQL untuk menghapus data
-    $sql = "DELETE FROM jual_barang WHERE id = $id";
-
-    if ($conn->query($sql) === TRUE) {
-        // Mengarahkan pengguna kembali ke index.php setelah berhasil menghapus data
-        header("Location: index.php");
-        exit();
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-
-    // Menutup koneksi
-    $conn->close();
-} else {
-    echo "ID tidak ditemukan!";
+// Memeriksa koneksi
+if ($conn->connect_error) {
+    die("Koneksi gagal: " . $conn->connect_error);
 }
+
+// Memeriksa apakah parameter id_barang dikirim melalui URL
+if (isset($_GET["id_barang"])) {
+    $id_barang = $_GET["id_barang"];
+
+    // Menyiapkan query SQL untuk menghapus data dari tabel barang
+    $sql = "DELETE FROM barang WHERE id_barang='$id_barang'";
+
+    // Menjalankan query
+    if ($conn->query($sql) === TRUE) {
+        // Mengarahkan pengguna kembali ke halaman index.php setelah menghapus data
+        header("Location: index.php?message=deleted");
+        exit(); // Pastikan kode setelah header() tidak dijalankan
+    } else {
+        // Jika gagal, tampilkan pesan kesalahan
+        header("Location: index.php?message=error");
+        exit(); // Pastikan kode setelah header() tidak dijalankan
+    }
+}
+
+// Menutup koneksi
+$conn->close();
 ?>

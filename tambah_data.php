@@ -1,90 +1,66 @@
-<?php
-include 'koneksi.php';
-
-// Memeriksa apakah data dikirimkan dari form tambah_data.php
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $id_barang = $_POST["id_barang"];
-    $nama_barang = $_POST["nama_barang"];
-    $satuan = $_POST["satuan"];
-    $harga_beli = $_POST["harga_beli"];
-    $harga_jual = $_POST["harga_jual"];
-    $stock = $_POST["stock"];
-
-    // Menyiapkan query SQL untuk menyimpan data ke dalam tabel barang
-    $sql = "INSERT INTO barang (id_barang, nama_barang, satuan, harga_beli, harga_jual, stock)
-            VALUES ('$id_barang', '$nama_barang', '$satuan', $harga_beli, $harga_jual, $stock)";
-
-    // Menjalankan query
-    if ($conn->query($sql) === TRUE) {
-        // Jika data berhasil ditambahkan, arahkan ke halaman index.php
-        header("Location: index.php");
-        exit(); // Pastikan kode setelah header() tidak dijalankan
-    } else {
-        echo "Error: " . $sql . "<br>" . $conn->error;
-    }
-}
-
-// Menutup koneksi
-$conn->close();
-?>
-
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Tambah Data Barang</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Tambah Data Karyawan</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
         /* Custom CSS */
+        body {
+            background-image: url('gojo.png');
+            background-size: cover; /* Menutupi seluruh area body */
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            padding: 20px;
+            color: #333; /* Warna teks utama */
+        }
         .container {
+            background-color: rgba(255, 255, 255, 0.8); /* Warna latar belakang container dengan opacity */
+            padding: 20px;
             margin-top: 50px;
+            border-radius: 10px; /* Border radius untuk membulatkan sudut kontainer */
+        }
+        h2 {
+            color: #000; /* Warna teks untuk judul */
+            text-align: center; /* Pusatkan judul */
+        }
+        form {
+            background-color: rgba(255, 255, 255, 0.9); /* Warna latar belakang form dengan opacity */
+            padding: 20px;
+            border-radius: 10px; /* Border radius untuk membulatkan sudut form */
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <div class="card">
-        <div class="card-header">
-            <h3>Tambah Data Barang</h3>
+    <h2 class="mb-4">Form Tambah Data Karyawan</h2>
+    <form method="post" action="simpan_data.php">
+        <div class="form-group">
+            <label for="id_karyawan">ID Karyawan:</label>
+            <input type="text" class="form-control" id="id_karyawan" name="id_karyawan" required>
         </div>
-        <div class="card-body">
-            <form method="post" action="tambah_data.php">
-                <div class="form-group">
-                    <label for="id_barang">ID Barang:</label>
-                    <input type="text" class="form-control form-control-lg" id="id_barang" name="id_barang" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="nama_barang">Nama Barang:</label>
-                    <input type="text" class="form-control form-control-lg" id="nama_barang" name="nama_barang" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="satuan">Satuan:</label>
-                    <input type="text" class="form-control form-control-lg" id="satuan" name="satuan" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="harga_beli">Harga Beli:</label>
-                    <input type="number" class="form-control form-control-lg" id="harga_beli" name="harga_beli" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="harga_jual">Harga Jual:</label>
-                    <input type="number" class="form-control form-control-lg" id="harga_jual" name="harga_jual" required>
-                </div>
-
-                <div class="form-group">
-                    <label for="stock">Stock:</label>
-                    <input type="number" class="form-control form-control-lg" id="stock" name="stock" required>
-                </div>
-
-                <button type="submit" class="btn btn-outline-primary">Tambah</button>
-                <a href="index.php" class="btn btn-secondary">Kembali</a>
-            </form>
+        <div class="form-group">
+            <label for="nama_karyawan">Nama Karyawan:</label>
+            <input type="text" class="form-control" id="nama_karyawan" name="nama_karyawan" required>
         </div>
-    </div>
+        <div class="form-group">
+            <label for="alamat">Alamat:</label>
+            <input type="text" class="form-control" id="alamat" name="alamat" required>
+        </div>
+        <div class="form-group">
+            <label for="no_hp">No HP:</label>
+            <input type="text" class="form-control" id="no_hp" name="no_hp" required>
+        </div>
+        <div class="form-group">
+            <label for="tanggal_lahir">Tanggal Lahir:</label>
+            <input type="date" class="form-control" id="tanggal_lahir" name="tanggal_lahir" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Tambah</button>
+        <a href="index.php" class="btn btn-secondary">Kembali</a>
+    </form>
 </div>
 
 <!-- Bootstrap JS (optional) -->

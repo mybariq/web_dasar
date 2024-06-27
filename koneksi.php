@@ -2,14 +2,13 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "dbkaryawan";
+$dbname = "bengkel";
 
-// Membuat koneksi
+// Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 
-// Memeriksa koneksi
+// Check connection
 if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+    die("Connection failed: " . $conn->connect_error);
 }
-echo "";
 ?>

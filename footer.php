@@ -23,7 +23,7 @@
     </div>
     <footer class="bg-primary text-white text-center text-lg-start mt-4">
         <div class="text-center p-3">
-             Grosir Chamskie.
+             Bengkel Chamskie 2024.
         </div>
     </footer>
 </body>

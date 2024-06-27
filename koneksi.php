@@ -1,14 +1,12 @@
 <?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "bengkel";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+$dbname='db_tamu';
+$host='localhost';
+$password='';
+$username='root';
+//Koneksi Ke MySQL
+$conn = mysqli_connect($host,$username,$password,$dbname); 
+if(mysqli_connect_errno()){
+echo "Koneksi Gagal.";
+exit();
 }
 ?>

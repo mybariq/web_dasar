@@ -1,8 +1,14 @@
 <?php
-$host = "localhost"; // Nama hostnya
-$username = "root"; // Username
-$password = ""; // Password (Isi jika menggunakan password)
-$database = "db_siswa"; // Nama databasenya
-$connect = mysqli_connect($host, $username, $password, $database); 
-// Koneksi ke MySQL
+$servername = "localhost";
+$username = "root";
+$password = "";
+$dbname = "dbjual";
+
+// Create connection
+$conn = new mysqli($servername, $username, $password, $dbname);
+
+// Check connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+}
 ?>
